@@ -2,7 +2,7 @@ from setuptools import Extension, setup
 from Cython.Build import cythonize
 
 extensions = [
-    Extension("grid_distance_cython", ["grid_distance_cython.pyx"], define_macros=[("NPY_NO_DEPRECATED_API", "NPY_1_7_API_VERSION")]),
+    Extension("valeriepieris", ["src/valeriepieris.pyx"], define_macros=[("NPY_NO_DEPRECATED_API", "NPY_1_7_API_VERSION")]),
 ]
 setup(
    ext_modules = cythonize(extensions, annotate=True, 
