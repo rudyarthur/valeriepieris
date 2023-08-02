@@ -1,4 +1,6 @@
 # valeriepieris
+![vpmap](https://github.com/rudyarthur/valeriepieris/raw/main/tests/test_global.png)
+
 Find valeriepieris circles. There are the smallest circles containing at least a fraction f of the data. See [the paper](https://arxiv.org/abs/2307.16728) for much more details on how this works and what you can do with a valeriepieris circle.
 
 The code expects 2d-numpy arrays from e.g. [SEDAC](https://sedac.ciesin.columbia.edu/data/set/gpw-v4-population-count-rev11/data-download). 
@@ -61,8 +63,7 @@ At f=0.5, radius=10344.885492078058, population=3987443544.209256, centre=[(50.5
 ```
 
 ## Plotting the circles
-Remember the earth is round, so don't just draw a circle on a flat map! See `tests.py` for example to make the plot below
-![vpmap](https://github.com/rudyarthur/valeriepieris/blob/main/tests/test_global.png)
+Remember the earth is round, so don't just draw a circle on a flat map! See `tests.py` for example to make the plot at the top
 
 
 
