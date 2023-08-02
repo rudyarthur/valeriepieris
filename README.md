@@ -63,7 +63,7 @@ At f=0.5, radius=10344.885492078058, population=3987443544.209256, centre=[(50.5
 ```
 
 ## Plotting the circles
-Remember the earth is round, so don't just draw a circle on a flat map! See `tests.py` for example to make the plot at the top
+Remember the earth is round, so don't just draw a circle on a flat map! See [test.py](https://github.com/rudyarthur/valeriepieris/raw/main/tests/test.py) for code to make the plot at the top
 
 
 
