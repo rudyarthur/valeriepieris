@@ -282,7 +282,7 @@ def call_grid_distances_from_id(distance, lat_id, lon_id, pt):
 
 	
 		
-cdef void expand(double [:, :] distance, double [:,:] data, cnp.int32_t [:,:] ew, double [:] target_vars, int row, int col, int clat, int clon, int symm, int torad, double new_rad):
+cdef void expand(double [:, :] distance, double [:,:] data, cnp.int64_t [:,:] ew, double [:] target_vars, int row, int col, int clat, int clon, int symm, int torad, double new_rad):
 	
 	cdef double target = target_vars[0]
 	cdef double rad = target_vars[1]
@@ -358,13 +358,13 @@ def call_expand(distance, data, ew, target, rad, rad_inc, dsum, clat, clon, symm
 	
 	cdef double [:,:] distance_view = distance
 	cdef double [:,:] data_view = data
-	cdef cnp.int32_t [:,:] ew_view = ew
+	cdef cnp.int64_t [:,:] ew_view = ew
 
 	expand(distance_view, data_view, ew_view, target_vars, row, col, lat, lon, symm , torad, xnew_rad)
 	return target_vars[1], target_vars[2]
 
 
-cdef void rshift(double [:, :] distance, double [:,:] data, cnp.int32_t [:,:] ew, double [:] target_vars, int row, int col, int clat, int clon, int symm):
+cdef void rshift(double [:, :] distance, double [:,:] data, cnp.int64_t [:,:] ew, double [:] target_vars, int row, int col, int clat, int clon, int symm):
 
 	cdef double rad = target_vars[1]
 	cdef double dsum = target_vars[2]
@@ -427,14 +427,14 @@ def call_rshift(distance, data, ew, xdsum, xclat, xclon, xrad, symm=True):
 
 	cdef double [:,:] distance_view = distance
 	cdef double [:,:] data_view = data
-	cdef cnp.int32_t [:,:] ew_view = ew
+	cdef cnp.int64_t [:,:] ew_view = ew
 
 	rshift( distance_view, data_view, ew_view, target_vars, row, col, clat,  clon, symm )
 	return target_vars[2]
 	
 #######################	
 	
-cdef void lshift(double [:, :] distance, double [:,:] data, cnp.int32_t [:,:] ew, double [:] target_vars, int row, int col, int clat, int clon, int symm):
+cdef void lshift(double [:, :] distance, double [:,:] data, cnp.int64_t [:,:] ew, double [:] target_vars, int row, int col, int clat, int clon, int symm):
 
 	cdef double rad = target_vars[1]
 	cdef double dsum = target_vars[2]
@@ -497,7 +497,7 @@ def call_lshift(distance, data, ew, xdsum, xclat, xclon, xrad, symm=True):
 
 	cdef double [:,:] distance_view = distance
 	cdef double [:,:] data_view = data
-	cdef cnp.int32_t [:,:] ew_view = ew
+	cdef cnp.int64_t [:,:] ew_view = ew
 
 	lshift( distance_view, data_view, ew_view, target_vars, row, col, clat,  clon, symm )
 	return target_vars[2]
@@ -505,7 +505,7 @@ def call_lshift(distance, data, ew, xdsum, xclat, xclon, xrad, symm=True):
 #######################	
 
 
-cdef void vshift(double [:, :] distance, double [:,:] data, cnp.int32_t [:,:] ew, double [:] target_vars, int row, int col, int clat, int clon, int symm):
+cdef void vshift(double [:, :] distance, double [:,:] data, cnp.int64_t [:,:] ew, double [:] target_vars, int row, int col, int clat, int clon, int symm):
 			
 				
 	cdef double rad = target_vars[1]
@@ -602,7 +602,7 @@ def call_vshift(distance, data, ew, xdsum, xclat, xclon, xrad, symm=True):
 
 	cdef double [:,:] distance_view = distance
 	cdef double [:,:] data_view = data
-	cdef cnp.int32_t [:,:] ew_view = ew
+	cdef cnp.int64_t [:,:] ew_view = ew
 
 	vshift( distance_view, data_view, ew_view, target_vars, row, col, clat,  clon, symm)
 
@@ -614,7 +614,7 @@ def call_vshift(distance, data, ew, xdsum, xclat, xclon, xrad, symm=True):
 
 
 			
-cdef void shrink(double [:, :] distance, double [:,:] data, cnp.int32_t [:,:] ew, double [:] target_vars, int row, int col, int clat, int clon, int symm, int torad, double new_rad):
+cdef void shrink(double [:, :] distance, double [:,:] data, cnp.int64_t [:,:] ew, double [:] target_vars, int row, int col, int clat, int clon, int symm, int torad, double new_rad):
 
 	cdef double target = target_vars[0]
 	cdef double rad = target_vars[1]
@@ -696,7 +696,7 @@ def call_shrink(distance, data, ew, target, rad, rad_inc, dsum, clat, clon, symm
 	
 	cdef double [:,:] distance_view = distance
 	cdef double [:,:] data_view = data
-	cdef cnp.int32_t [:,:] ew_view = ew
+	cdef cnp.int64_t [:,:] ew_view = ew
 
 	shrink(distance_view, data_view, ew_view, target_vars, row, col, lat, lon, symm, torad, xnew_rad)
 	
@@ -707,7 +707,7 @@ def call_shrink(distance, data, ew, target, rad, rad_inc, dsum, clat, clon, symm
 					
 	
 	
-cdef void refine(double [:, :] distance, double [:,:] data, cnp.int32_t [:,:] ew, double [:] target_vars, int row, int col, int clat, int clon, int symm, double thresh):
+cdef void refine(double [:, :] distance, double [:,:] data, cnp.int64_t [:,:] ew, double [:] target_vars, int row, int col, int clat, int clon, int symm, double thresh):
 
 	#force the best to be within one grid cell
 	if target_vars[3] > target_vars[1]:
@@ -775,7 +775,7 @@ def call_refine(distance, data, ew, target, rad, rad_inc, dsum, clat, clon, symm
 	cdef double xthresh = thresh
 	cdef double [:,:] distance_view = distance
 	cdef double [:,:] data_view = data
-	cdef cnp.int32_t [:,:] ew_view = ew
+	cdef cnp.int64_t [:,:] ew_view = ew
 
 	refine( distance_view, data_view, ew_view, target_vars, row, col, lat, lon, symm, xthresh)
 
@@ -903,7 +903,7 @@ def valeriepieris(input_data, data_bounds, target_frac, target_bounds=None, sear
 	np_ew = np.zeros( (ntarget,row,2), dtype=np.int_)		
 	cdef double [:, :] distance = np_distance
 	cdef double [:,:] data = np_data
-	cdef cnp.int32_t [:,:,:] ew = np_ew
+	cdef cnp.int64_t [:,:,:] ew = np_ew
 
 	cdef double [:,:] target_vars = np.empty( (ntarget,5) )
 	cdef int i
